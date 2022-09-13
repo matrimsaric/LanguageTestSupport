@@ -52,39 +52,7 @@ namespace LanguageTestSupport
 
         }
 
-        [TestMethod]
-        public void TesInflectionSaveLoadDeleteSimple()
-        {
-            try
-            {
-                Inflection full = new StandardCasual("A", Guid.NewGuid(), Guid.NewGuid());
-
-                Task<bool> result = dat.SaveInflection(full);
-
-                Task<Inflection> response = dat.LoadSpecificInflection(full.Id);
-
-                Assert.IsNotNull(response);
-
-                // Delete Verb
-                Task<bool> result3 = dat.DeleteInflection(response.Result);
-
-                // Reload should not exist
-                Task<Inflection> result4 = dat.LoadSpecificInflection(full.Id);
-
-                if (result4.Result.Id != Guid.Empty)
-                {
-                    Assert.Fail("Inflection has not deleted fail: " + full.Id);
-                }
-
-            }
-            catch (Exception ex)
-            {
-                Assert.Fail("Exception thrown Inflection SaveLoadDelete fail: " + ex);
-
-            }
-
-
-        }
+      
 
         [TestMethod]
         public void TestTenseSaveLoadDeleteSimple()
