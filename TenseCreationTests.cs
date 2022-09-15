@@ -201,6 +201,36 @@ namespace LanguageTestSupport
             try
             {
                 Tense tense = new Tense("書く", "かく", "Kaku", "To Write", "", guidToUse, TENSE_TYPE.CURRENT_FUTURE_NEGATIVE, Guid.NewGuid());
+
+                bool works2 = tense.IsValid();
+
+                Assert.IsTrue(works2);
+            }
+            catch
+            {
+                Assert.Fail("Entries were valid - Exception should not have been thrown");
+            }
+
+            return;
+
+
+
+
+
+        }
+
+        [TestMethod]
+        public void ValidateWorks()
+        {
+            try
+            {
+                Tense tense = new Tense(guidToUse, TENSE_TYPE.CURRENT_FUTURE_NEGATIVE);// default constructor
+                 bool works = tense.IsValid();
+
+                Assert.IsFalse(works);
+
+
+
             }
             catch
             {
@@ -215,6 +245,8 @@ namespace LanguageTestSupport
 
         }
         #endregion Valid tests
+
+
 
 
     }
