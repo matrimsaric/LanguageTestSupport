@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Runtime.CompilerServices;
 using NuGet.Frameworks;
 using LanguageConsult.Verbs.InflectionControl;
+using System.Data;
 
 namespace LanguageTestSupport
 {
@@ -59,7 +60,7 @@ namespace LanguageTestSupport
         {
             try
             {
-                Tense tense = new Tense("書く", "かく", "Kaku", "To Write", "", guidToUse, TENSE_TYPE.CURRENT_FUTURE_NEGATIVE, Guid.NewGuid());
+                Tense tense = new Tense("書く", "かく", "Kaku", "To Write", "", guidToUse, TENSE_TYPE.CURRENT_FUTURE_NEGATIVE, Guid.NewGuid(),"PotentialCasual");
 
                 Task<bool> result = dat.SaveTense(tense);
 
@@ -76,6 +77,64 @@ namespace LanguageTestSupport
                 if (result4.Result.Id != Guid.Empty)
                 {
                     Assert.Fail("Tense has not deleted fail: " + tense.Id);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail("Exception thrown Tense SaveLoadDelete fail: " + ex);
+
+            }
+
+
+        }
+
+        [TestMethod]
+        public void TestLoadFilteredVerbsMethod()
+        {
+            try
+            {
+
+
+                Task<DataTable> response = dat.LoadFilteredVerbs(1, -1, String.Empty);
+
+                Assert.IsNotNull(response);
+
+                if(response.Result.Rows.Count <= 2)
+                {
+                    // throw an error this is an ichidan search and we have more than 1 in the db
+                    Assert.Fail("Expected multiple returned records for an Ichidan search");
+                }
+
+                // 2nd part search for a specific godan record
+                response = dat.LoadFilteredVerbs(2, 1, "よむ");
+
+                Assert.IsNotNull(response);
+
+                if (response.Result.Rows.Count != 1)
+                {
+                    // throw an error this is an ichidan search and we have more than 1 in the db
+                    Assert.Fail("Expected single returned record..");
+
+                    // then check record is yomu
+                    DataTable res = response.Result;
+
+                    if (res.Rows[0]["Hiragana"].ToString() != "よむ")
+                    {
+                        Assert.Fail("Expected Yomu to be returned, actual return was: " + res.Rows[0]["Hiragana"].ToString());
+                    }
+                }
+
+                // 3rd part search for a specific godan record with an ichidan flag, should return zero
+                response = dat.LoadFilteredVerbs(1, 1, "よむ");
+
+                Assert.IsNotNull(response);
+
+                if (response.Result.Rows.Count != 0)
+                {
+                    // throw an error this is an ichidan search and we have more than 1 in the db
+                    Assert.Fail("Expected no returns as a fake search");
+
                 }
 
             }
