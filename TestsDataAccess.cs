@@ -17,7 +17,8 @@ namespace LanguageTestSupport
     public class TestsDataAccess
     {
         private Guid guidToUse = Guid.NewGuid();
-        private DataAccess dat = new MsSqlDataAccess();
+        private DataAccessProvider dataAccessProvider = new DataAccessProvider();
+
 
         [TestMethod]
         public void TestVerbSaveLoadDeleteSimple()
@@ -26,17 +27,17 @@ namespace LanguageTestSupport
             {
                 Verb verb = new GodanVerb("書く", "かく", "kaku", "To Write", Guid.Empty, "書く", false);
 
-                Task<bool> result = dat.SaveVerb(verb);
+                Task<bool> result = dataAccessProvider.GetLiveDataAccess().SaveVerb(verb);
 
-                Task<Verb> response = dat.LoadSpecificVerb(verb.Id);
+                Task<Verb> response = dataAccessProvider.GetLiveDataAccess().LoadSpecificVerb(verb.Id);
 
                 Assert.IsNotNull(response);
 
                 // Delete Verb
-                Task<bool> result3 = dat.DeleteVerb(response.Result);
+                Task<bool> result3 = dataAccessProvider.GetLiveDataAccess().DeleteVerb(response.Result);
 
                 // Reload should not exist
-                Task<Verb> result4 = dat.LoadSpecificVerb(verb.Id);
+                Task<Verb> result4 = dataAccessProvider.GetLiveDataAccess().LoadSpecificVerb(verb.Id);
 
                 if(result4.Result.Id != Guid.Empty)
                 {
@@ -62,17 +63,17 @@ namespace LanguageTestSupport
             {
                 Tense tense = new Tense("書く", "かく", "Kaku", "To Write", "", guidToUse, TENSE_TYPE.CURRENT_FUTURE_NEGATIVE, Guid.NewGuid(),"PotentialCasual");
 
-                Task<bool> result = dat.SaveTense(tense);
+                Task<bool> result = dataAccessProvider.GetLiveDataAccess().SaveTense(tense);
 
-                Task<Tense> response = dat.LoadSpecificTense(tense.Id);
+                Task<Tense> response = dataAccessProvider.GetLiveDataAccess().LoadSpecificTense(tense.Id);
 
                 Assert.IsNotNull(response);
 
                 // Delete Verb
-                Task<bool> result3 = dat.DeleteTense(response.Result);
+                Task<bool> result3 = dataAccessProvider.GetLiveDataAccess().DeleteTense(response.Result);
 
                 // Reload should not exist
-                Task<Tense> result4 = dat.LoadSpecificTense(tense.Id);
+                Task<Tense> result4 = dataAccessProvider.GetLiveDataAccess().LoadSpecificTense(tense.Id);
 
                 if (result4.Result.Id != Guid.Empty)
                 {
@@ -89,6 +90,73 @@ namespace LanguageTestSupport
 
         }
 
+        private string hackText = @"<img src=x onerror=&#x22;&#x61;&#x6C;&#x65;&#x72;&#x74;&#x28;&#x31;&#x29;&#x22;>";
+        [TestMethod]
+        public void TestFilteredKanjiSecurity()
+        {
+            try
+            {
+
+                Task<DataTable> response = dataAccessProvider.GetLiveDataAccess().LoadFilteredVerbs(1, 0, hackText);
+
+            }
+            catch(Exception ex)
+            {
+                return;
+            }
+            Assert.Fail("Hack Attempt [1] should have failed ");
+        }
+
+        [TestMethod]
+        public void TestFilteredHiraganaSecurity()
+        {
+            try
+            {
+                Task<DataTable> response = dataAccessProvider.GetLiveDataAccess().LoadFilteredVerbs(1, 1, hackText);
+
+            }
+            catch
+            {
+                return;
+            }
+            Assert.Fail("Hack Attempt [1] should have failed ");
+        }
+
+        [TestMethod]
+        public void TestFilteredRomajiSecurity()
+        {
+            try
+            {
+                Task<DataTable> response = dataAccessProvider.GetLiveDataAccess().LoadFilteredVerbs(1, 2, hackText);
+
+            }
+            catch
+            {
+                return;
+            }
+            Assert.Fail("Hack Attempt [1] should have failed ");
+        }
+
+        [TestMethod]
+        public void TestFilteredMeaningSecurity()
+        {
+            try
+            {
+                Task<DataTable> response = dataAccessProvider.GetLiveDataAccess().LoadFilteredVerbs(1, 3, hackText);
+
+            }
+            catch
+            {
+                return;
+            }
+            Assert.Fail("Hack Attempt [1] should have failed ");
+        }
+
+
+
+
+       
+
         [TestMethod]
         public void TestLoadFilteredVerbsMethod()
         {
@@ -96,7 +164,7 @@ namespace LanguageTestSupport
             {
 
 
-                Task<DataTable> response = dat.LoadFilteredVerbs(1, -1, String.Empty);
+                Task<DataTable> response = dataAccessProvider.GetLiveDataAccess().LoadFilteredVerbs(1, -1, String.Empty);
 
                 Assert.IsNotNull(response);
 
@@ -107,7 +175,7 @@ namespace LanguageTestSupport
                 }
 
                 // 2nd part search for a specific godan record
-                response = dat.LoadFilteredVerbs(2, 1, "よむ");
+                response = dataAccessProvider.GetLiveDataAccess().LoadFilteredVerbs(2, 1, "よむ");
 
                 Assert.IsNotNull(response);
 
@@ -126,7 +194,7 @@ namespace LanguageTestSupport
                 }
 
                 // 3rd part search for a specific godan record with an ichidan flag, should return zero
-                response = dat.LoadFilteredVerbs(1, 1, "よむ");
+                response = dataAccessProvider.GetLiveDataAccess().LoadFilteredVerbs(1, 1, "よむ");
 
                 Assert.IsNotNull(response);
 

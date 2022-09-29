@@ -13,7 +13,7 @@ namespace LanguageTestSupport
         {
             try
             {
-                Verb verb = new IchidanVerb(String.Empty, "a", "b", "c", Guid.NewGuid(), "書", false);
+                Verb verb = new IchidanVerb(String.Empty, "かく", "b", "c", Guid.NewGuid(), "書", false);
             }
             catch
             {
@@ -28,7 +28,7 @@ namespace LanguageTestSupport
         {
             try
             {
-                Verb verb = new GodanVerb(String.Empty, "a", "b", "c", Guid.NewGuid(), "書", false);
+                Verb verb = new GodanVerb(String.Empty, "かく", "b", "c", Guid.NewGuid(), "書", false);
             }
             catch
             {
@@ -43,7 +43,7 @@ namespace LanguageTestSupport
         {
             try
             {
-                Verb verb = new IchidanVerb("a", String.Empty, "b", "c", Guid.NewGuid(), "書", false);
+                Verb verb = new IchidanVerb("書", String.Empty, "b", "c", Guid.NewGuid(), "書", false);
             }
             catch
             {
@@ -58,7 +58,7 @@ namespace LanguageTestSupport
         {
             try
             {
-                Verb verb = new GodanVerb("a", String.Empty, "b", "c", Guid.NewGuid(), "書", false);
+                Verb verb = new GodanVerb("書", String.Empty, "b", "c", Guid.NewGuid(), "書", false);
             }
             catch
             {
@@ -73,7 +73,7 @@ namespace LanguageTestSupport
         {
             try
             {
-                Verb verb = new IchidanVerb("a", "a", String.Empty, "c", Guid.NewGuid(), "書", false);
+                Verb verb = new IchidanVerb("書", "かく", String.Empty, "c", Guid.NewGuid(), "書", false);
             }
             catch
             {
@@ -88,7 +88,7 @@ namespace LanguageTestSupport
         {
             try
             {
-                Verb verb = new GodanVerb("a", "a", String.Empty, "c", Guid.NewGuid(), "書", false);
+                Verb verb = new GodanVerb("書", "かく", String.Empty, "c", Guid.NewGuid(), "書", false);
             }
             catch
             {
@@ -112,7 +112,7 @@ namespace LanguageTestSupport
         {
             try
             {
-                Verb verb = new IchidanVerb(hackText, "a", String.Empty, "c", Guid.NewGuid(), "書", false);
+                Verb verb = new IchidanVerb(hackText, "かく", String.Empty, "c", Guid.NewGuid(), "書", false);
             }
             catch
             {
@@ -130,7 +130,7 @@ namespace LanguageTestSupport
         {
             try
             {
-                Verb verb = new IchidanVerb("a", hackText, String.Empty, "c", Guid.NewGuid(), "書", false);
+                Verb verb = new IchidanVerb("書", hackText, String.Empty, "c", Guid.NewGuid(), "書", false);
             }
             catch
             {
@@ -148,7 +148,7 @@ namespace LanguageTestSupport
         {
             try
             {
-                Verb verb = new IchidanVerb("a", "a", hackText, "c", Guid.NewGuid(), "書", false);
+                Verb verb = new IchidanVerb("書", "かく", hackText, "c", Guid.NewGuid(), "書", false);
             }
             catch
             {
@@ -166,7 +166,7 @@ namespace LanguageTestSupport
         {
             try
             {
-                Verb verb = new IchidanVerb("a", "a", "a", hackText, Guid.NewGuid(), "書", false);
+                Verb verb = new IchidanVerb("書", "かく", "a", hackText, Guid.NewGuid(), "書", false);
                
             }
             catch
@@ -185,7 +185,7 @@ namespace LanguageTestSupport
         {
             try
             {
-                Verb verb = new GodanVerb(hackText, "a", String.Empty, "c", Guid.NewGuid(), "書", false);
+                Verb verb = new GodanVerb(hackText, "かく", String.Empty, "c", Guid.NewGuid(), "書", false);
             }
             catch
             {
@@ -203,7 +203,7 @@ namespace LanguageTestSupport
         {
             try
             {
-                Verb verb = new GodanVerb("a", hackText, String.Empty, "c", Guid.NewGuid(), "書", false);
+                Verb verb = new GodanVerb("書", hackText, String.Empty, "c", Guid.NewGuid(), "書", false);
             }
             catch
             {
@@ -221,7 +221,7 @@ namespace LanguageTestSupport
         {
             try
             {
-                Verb verb = new GodanVerb("a", "a", hackText, "c", Guid.NewGuid(), "書", false);
+                Verb verb = new GodanVerb("書", "かく", hackText, "c", Guid.NewGuid(), "書", false);
             }
             catch
             {
@@ -239,7 +239,7 @@ namespace LanguageTestSupport
         {
             try
             {
-                Verb verb = new GodanVerb("a", "a", "a", hackText, Guid.NewGuid(), "書", false);
+                Verb verb = new GodanVerb("書", "かく", "a", hackText, Guid.NewGuid(), "書", false);
 
             }
             catch

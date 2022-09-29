@@ -13,7 +13,7 @@ namespace LanguageTestSupport
         {
             try
             {
-                Tense tense = new Tense("", "a", "b", "c", "d", guidToUse, TENSE_TYPE.CURRENT_FUTURE_NEGATIVE,Guid.NewGuid(),"PotentialCasual");
+                Tense tense = new Tense("", "かく", "b", "c", "d", guidToUse, TENSE_TYPE.CURRENT_FUTURE_NEGATIVE,Guid.NewGuid(),"PotentialCasual");
             }
             catch
             {
@@ -31,7 +31,7 @@ namespace LanguageTestSupport
         {
             try
             {
-                Tense tense = new Tense("a", "", "b", "c", "d", guidToUse, TENSE_TYPE.CURRENT_FUTURE_NEGATIVE, Guid.NewGuid(), "PotentialCasual");
+                Tense tense = new Tense("書", "", "b", "c", "d", guidToUse, TENSE_TYPE.CURRENT_FUTURE_NEGATIVE, Guid.NewGuid(), "PotentialCasual");
             }
             catch
             {
@@ -44,30 +44,14 @@ namespace LanguageTestSupport
 
         }
 
-        [TestMethod]
-        public void BlankRomaji()
-        {
-            try
-            {
-                Tense tense = new Tense("a", "a", "", "c", "d", guidToUse, TENSE_TYPE.CURRENT_FUTURE_NEGATIVE, Guid.NewGuid(), "PotentialCasual");
-            }
-            catch
-            {
-                return;
-            }
-
-            Assert.Fail("Romaji was blank exception should have been thrown");
-
-
-
-        }
+       
 
         [TestMethod]
         public void BlankMeaning()
         {
             try
             {
-                Tense tense = new Tense("a", "a", "b", "", "d", guidToUse, TENSE_TYPE.CURRENT_FUTURE_NEGATIVE, Guid.NewGuid(), "PotentialCasual");
+                Tense tense = new Tense("書", "かく", "b", "", "d", guidToUse, TENSE_TYPE.CURRENT_FUTURE_NEGATIVE, Guid.NewGuid(), "PotentialCasual");
             }
             catch
             {
@@ -85,7 +69,7 @@ namespace LanguageTestSupport
         {
             try
             {
-                Tense tense = new Tense("a", "a", "b", "", "d", guidToUse, TENSE_TYPE.CURRENT_FUTURE_NEGATIVE, Guid.NewGuid(), "PotentialCasual");
+                Tense tense = new Tense("書", "かく", "b", "", "d", guidToUse, TENSE_TYPE.CURRENT_FUTURE_NEGATIVE, Guid.NewGuid(), "PotentialCasual");
             }
             catch
             {
@@ -108,7 +92,7 @@ namespace LanguageTestSupport
         {
             try
             {
-                Tense tense = new Tense(hackText, "a", "b", "c", "d", guidToUse, TENSE_TYPE.CURRENT_FUTURE_NEGATIVE, Guid.NewGuid(), "PotentialCasual");
+                Tense tense = new Tense(hackText, "かく", "b", "c", "d", guidToUse, TENSE_TYPE.CURRENT_FUTURE_NEGATIVE, Guid.NewGuid(), "PotentialCasual");
             }
             catch
             {
@@ -126,7 +110,7 @@ namespace LanguageTestSupport
         {
             try
             {
-                Tense tense = new Tense("a", hackText, "b", "c", "d", guidToUse, TENSE_TYPE.CURRENT_FUTURE_NEGATIVE, Guid.NewGuid(), "PotentialCasual");
+                Tense tense = new Tense("書", hackText, "b", "c", "d", guidToUse, TENSE_TYPE.CURRENT_FUTURE_NEGATIVE, Guid.NewGuid(), "PotentialCasual");
             }
             catch
             {
@@ -144,7 +128,7 @@ namespace LanguageTestSupport
         {
             try
             {
-                Tense tense = new Tense("a", "v", hackText, "c", "d", guidToUse, TENSE_TYPE.CURRENT_FUTURE_NEGATIVE, Guid.NewGuid(), "PotentialCasual");
+                Tense tense = new Tense("書", "かく", hackText, "c", "d", guidToUse, TENSE_TYPE.CURRENT_FUTURE_NEGATIVE, Guid.NewGuid(), "PotentialCasual");
             }
             catch
             {
@@ -162,7 +146,7 @@ namespace LanguageTestSupport
         {
             try
             {
-                Tense tense = new Tense("a", "v", "b", hackText, "d", guidToUse, TENSE_TYPE.CURRENT_FUTURE_NEGATIVE, Guid.NewGuid(), "PotentialCasual");
+                Tense tense = new Tense("書", "かく", "b", hackText, "d", guidToUse, TENSE_TYPE.CURRENT_FUTURE_NEGATIVE, Guid.NewGuid(), "PotentialCasual");
             }
             catch
             {
@@ -180,7 +164,7 @@ namespace LanguageTestSupport
         {
             try
             {
-                Tense tense = new Tense("a", "v", "b", "c", hackText, guidToUse, TENSE_TYPE.CURRENT_FUTURE_NEGATIVE, Guid.NewGuid(), "PotentialCasual");
+                Tense tense = new Tense("書", "かく", "b", "c", hackText, guidToUse, TENSE_TYPE.CURRENT_FUTURE_NEGATIVE, Guid.NewGuid(), "PotentialCasual");
             }
             catch
             {
